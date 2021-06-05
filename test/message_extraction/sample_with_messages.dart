@@ -322,5 +322,5 @@ main() {
       .then((_) => printStuff(english))
       .then((_) => printStuff(fr));
   var f2 = initializeMessages('de-de').then((_) => printStuff(de));
-  return Future.wait(<Future?>[f1, f2]);
+//  return Future.wait(<Future?>[f1, f2]);
 }

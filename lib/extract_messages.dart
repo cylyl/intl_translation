@@ -167,7 +167,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   String? name;
 
   final FormalParameterList _emptyParameterList =
-      astFactory.formalParameterList(null, [], null, null, null);
+      astFactory.formalParameterList(null!, [], null, null, null!);
 
   /// Return true if [node] matches the pattern we expect for Intl.message()
   bool looksLikeIntlMessage(MethodInvocation node) {
@@ -368,7 +368,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
         parameters!.parameters.map((x) => x.identifier!.name).toList();
     var arguments = node.argumentList.arguments;
     var extractionResult = extract(message, arguments);
-    if (extractionResult == null) return null;
+    if (extractionResult == null) return null!;
 
     for (var namedArgument in arguments.whereType<NamedExpression>()) {
       var name = namedArgument.name.label.name;
@@ -428,7 +428,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
         extracted = _extractFromIntlCallWithInterpolation(message, arguments);
         message.addPieces(extracted as List<Object>);
       } on IntlMessageExtractionException catch (e) {
-        message = null;
+        message = null!;
         var err = new StringBuffer()
           ..writeAll(["Error ", e, "\nProcessing <", node, ">\n"])
           ..write(extraction._reportErrorLocation(node));
